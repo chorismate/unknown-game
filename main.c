@@ -12,7 +12,32 @@
 
 
 
-int main(void) {
+int main(int argc, char **argv) {
+	if(argv[0] == NULL) {
+		fputs(
+			"argv[0] is NULL\n"
+			"faulty exec?\n",
+			stderr
+		);
+		return 1;
+	}
+	if(argc > 1) {
+		fprintf(
+			stderr,
+			"Too many command-line arguments.\n"
+			"To play the game, use\n"
+			"  > %s\n"
+			"For help, use\n"
+			"  > %s help\n",
+			argv[0], argv[0]
+		);
+		return 1;
+	}
+	if(!strcmp(argv[1], "version")) {
+		printf(
+			"unknown-game"
+		); // TODO
+	}
 	fputs("Welcome to Unknown.\n", stdout);
 	return 0;
 }
