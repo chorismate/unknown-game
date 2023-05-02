@@ -7,6 +7,7 @@
 
 #include "main.h"
 
+#include "argparse.h"
 #include "delays.h"
 #include "theoutset.h"
 
@@ -21,22 +22,10 @@ int main(int argc, char **argv) {
 		);
 		return 1;
 	}
-	if(argc > 1) {
-		fprintf(
-			stderr,
-			"Too many command-line arguments.\n"
-			"To play the game, use\n"
-			"  > %s\n"
-			"For help, use\n"
-			"  > %s help\n",
-			argv[0], argv[0]
-		);
-		return 1;
-	}
-	if(!strcmp(argv[1], "version")) {
-		printf(
-			"unknown-game"
-		); // TODO
+	if(argc > 1) argerror(argv[0], "Too many command-line arguments.");
+	if(argc == 1) {
+		if(!strcmp(argv[1], "help")) help(argv[0]);
+		else argerror("Unrecognized command-line argument.");
 	}
 	fputs("Welcome to Unknown.\n", stdout);
 	return 0;
